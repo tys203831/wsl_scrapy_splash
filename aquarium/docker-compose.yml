@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
     haproxy:
-        image: haproxy:1.7
+        image: haproxy:latest
         ports:
             # stats
             - "8036:8036"
@@ -17,7 +17,7 @@ services:
             - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
 
     splash0:
-        image: scrapinghub/splash:3.0
+        image: scrapinghub/splash:latest
         command: --max-timeout 3600 --slots 5 --maxrss 3000 --verbosity 1
         expose:
             - 8050
@@ -31,7 +31,7 @@ services:
             - ./filters:/etc/splash/filters:ro
 
     splash1:
-        image: scrapinghub/splash:3.0
+        image: scrapinghub/splash:latest
         command: --max-timeout 3600 --slots 5 --maxrss 3000 --verbosity 1
         expose:
             - 8050
@@ -45,7 +45,7 @@ services:
             - ./filters:/etc/splash/filters:ro
 
     splash2:
-        image: scrapinghub/splash:3.0
+        image: scrapinghub/splash:latest
         command: --max-timeout 3600 --slots 5 --maxrss 3000 --verbosity 1
         expose:
             - 8050
