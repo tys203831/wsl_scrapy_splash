@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+  python:
+    env_file: .env
+    build:
+      dockerfile: Dockerfile
+      context: . # ??
+      args:
+        # Update 'VARIANT' to pick a Python version: 3, 3.6, 3.7, 3.8, 3.9
+        VARIANT: "3"
+        # Options
+        NODE_VERSION: "lts/*"
+    container_name: pyenv
+    # Overrides default command so things don't shut down after the process ends.
+    command: /bin/sh -c "while sleep 1000; do :; done"  
+    restart: always
+    volumes:
+      - ..:/${PROJECT_DIR}:cached
+    networks:
+      - proxy
+
+  db:
+    env_file: .env
+    image: mysql:8 
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+#      MYSQL_USER: 'sandbox'
+#      MYSQL_PASSWORD: 'sandbox'
+      MYSQL_ROOT_USER: ${MYSQL_ROOT_USER}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - './docker/db/data:/var/lib/mysql'
+      - './docker/db/my.cnf:/etc/mysql/conf.d/my.cnf'
+      - './docker/db/sql:/docker-entrypoint-initdb.d'
+    ports:
+      - "3306:3306"
+    networks:
+      - proxy
+   
+  scrapinghub_splash:
+    env_file: .env
+    image: scrapinghub/splash
+    container_name: splash_container
+    restart: always
+    ports: 
+      - "8050:8050"
+    networks:
+      - proxy
+
+  phpmyadmin:
+    env_file: .env
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: ${PMA_HOST}
+      PMA_PORT: ${PMA_PORT}
+      PMA_ARBITRARY: 1 # when set to 1 connection to the arbitrary server will be allowed   # arbitraty server means allows you to modify everything on a system.
+      PMA_USER: ${PMA_USER}
+      PMA_PASSWORD: ${PMA_PASSWORD}
+    depends_on:
+      - ${PMA_HOST}
+    ports:
+      - "8080:80" # 80 is prefix for phpmyadmin port
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    name: ${NETWORK_NAME}
+    driver: ${NETWORK_DRIVER}
