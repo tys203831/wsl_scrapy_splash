@@ -13,6 +13,10 @@ class ListingsSpider(scrapy.Spider):
         "startPosition": 0
         }       # why start at 0, not 12, not so understand the basic concept although it is quite logical
 
+    http_user = "user"
+    http_pass = "userpass"
+    http_auth_domain = None
+
     script = '''
         function main(splash, args)
             splash:on_request(function(request)
@@ -118,6 +122,7 @@ class ListingsSpider(scrapy.Spider):
         sel = Selector(text=html_text)
         products = sel.xpath("//*[@itemtype='http://schema.org/Product']")
         for product in products:
+            print("5____________________________5")
             url = product.xpath(".//*[@class='shell']/a/@href").get()
             url = url.split("/", 2)[2]
             abs_url = f"http://www.centris.ca/en/{url}"
@@ -129,10 +134,10 @@ class ListingsSpider(scrapy.Spider):
             city = product.xpath(".//*[@class='address']/div/text()").get()[1]
             yield SplashRequest(url = abs_url, 
                                 callback= self.parse_summary,  
-                                endpoint = "execute", 
-                                args={
-                                    "lua_source": self.script
-                                    },
+                                endpoint = "render.html",# "execute", 
+                                # args={
+                                #     "lua_source": self.script
+                                #     },
                                 meta={
                                         "url": abs_url,
                                         "image url": image_url,
