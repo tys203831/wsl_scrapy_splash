@@ -1,4 +1,4 @@
-# Scrapy settings for yahoo_finance project
+# Scrapy settings for zillow project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,18 +7,20 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'yahoo_finance'
+BOT_NAME = 'zillow'
 
-SPIDER_MODULES = ['yahoo_finance.spiders']
-NEWSPIDER_MODULE = 'yahoo_finance.spiders'
+SPIDER_MODULES = ['zillow.spiders']
+NEWSPIDER_MODULE = 'zillow.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'yahoo_finance (+http://www.yourdomain.com)'
+#USER_AGENT = 'zillow (+http://www.yourdomain.com)'
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.30"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
+
+DOWNLOAD_DELAY = 10
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -32,7 +34,7 @@ ROBOTSTXT_OBEY = False
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-COOKIES_ENABLED = True
+#COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -46,13 +48,13 @@ COOKIES_ENABLED = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'yahoo_finance.middlewares.YahooFinanceSpiderMiddleware': 543,
+#    'zillow.middlewares.ZillowSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'yahoo_finance.middlewares.YahooFinanceDownloaderMiddleware': 543,
+#    'zillow.middlewares.ZillowDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -64,7 +66,7 @@ COOKIES_ENABLED = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'yahoo_finance.pipelines.YahooFinancePipeline': 300,
+#    'zillow.pipelines.ZillowPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
