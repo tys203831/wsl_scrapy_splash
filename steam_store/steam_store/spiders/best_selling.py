@@ -21,7 +21,7 @@ class BestSellingSpider(scrapy.Spider):
     def parse(self, response):
         games = response.xpath("//div[@id='search_resultsRows']/a")
         for game in games: 
-            loader = ItemLoader(item = SteamStoreItem(), selector=game)
+            loader = ItemLoader(item = SteamStoreItem(), selector=game, response=response)
             loader.add_xpath("game_url", "./@href")
             loader.add_xpath("img_url", ".//img/@src")
             loader.add_xpath("game_name", ".//span[@class='title']/text()")

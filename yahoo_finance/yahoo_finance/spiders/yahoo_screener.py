@@ -10,96 +10,32 @@ class YahooScreenerSpider(scrapy.Spider):
 
     def start_requests(self):
         json_dict = {
-    "size": 25,
-    "offset": 0,
-    "sortField": "intradaymarketcap",
-    "sortType": "DESC",
-    "quoteType": "EQUITY",
-    "topOperator": "AND",
-    "query": {
-        "operator": "AND",
-        "operands": [
-            {
-                "operator": "or",
-                "operands": [
-                    {
-                        "operator": "EQ",
-                        "operands": [
-                            "region",
-                            "us"
-                        ]
-                    }
-                ]
-            },
-            {
-                "operator": "or",
-                "operands": [
-                    {
-                        "operator": "LT",
-                        "operands": [
-                            "intradaymarketcap",
-                            2000000000
-                        ]
-                    }
-                ]
-            },
-            {
-                "operator": "or",
-                "operands": [
-                    {
-                        "operator": "EQ",
-                        "operands": [
-                            "sector",
-                            "Financial Services"
-                        ]
-                    }
-                ]
-            },
-            {
-                "operator": "or",
-                "operands": [
-                    {
-                        "operator": "EQ",
-                        "operands": [
-                            "industry",
-                            "Mortgage Finance"
-                        ]
-                    },
-                    {
-                        "operator": "EQ",
-                        "operands": [
-                            "industry",
-                            "Mortgage Finance"
-                        ]
-                    },
-                    {
-                        "operator": "EQ",
-                        "operands": [
-                            "industry",
-                            "Mortgage Finance"
-                        ]
-                    },
-                    {
-                        "operator": "EQ",
-                        "operands": [
-                            "industry",
-                            "Financial Conglomerates"
-                        ]
-                    },
-                    {
-                        "operator": "EQ",
-                        "operands": [
-                            "industry",
-                            "Financial Data & Stock Exchanges"
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    "userId": "",
-    "userIdType": "guid"
-}
+                        "size": 25,
+                        "offset": 0,
+                        "sortField": "intradaymarketcap",
+                        "sortType": "DESC",
+                        "quoteType": "EQUITY",
+                        "topOperator": "AND",
+                        "query": {
+                            "operator": "AND",
+                            "operands": [
+                                {
+                                    "operator": "or",
+                                    "operands": [
+                                    {
+                                        "operator": "EQ",
+                                        "operands": [
+                                            "region",
+                                            "us"
+                                        ]
+                                    }
+                                    ]
+                                }
+                            ]
+                        },
+                        "userId": "",
+                        "userIdType": "guid"
+                        }
         
         cookie_string = self.cookie_string.split(";")
         cookies = {}

@@ -10,6 +10,8 @@ mysql-connector-python = "*"
 scrapy-proxies = "*"
 scrapy-fake-useragent = "*"
 cookiecutter = "*"
+scrapyrt = "*"
+flask = "*"
 
 [dev-packages]
 

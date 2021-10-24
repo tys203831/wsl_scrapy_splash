@@ -88,3 +88,7 @@ DOWNLOAD_DELAY = 3
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+CLOSESPIDER_ITEMCOUNT=100 # only scrape 100 items
+HTTPCACHE_ENABLED = True
+HTTPCACHE_EXPIRATION_SECS = 3600 # will download http cache into your local storage, but will delete after 1 hour (= 3600 seconds)

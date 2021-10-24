@@ -28,9 +28,9 @@ def get_original_price(html_markup):
     div_with_discount = selector_obj.xpath(".//div[@class='col search_discount responsive_secondrow']/span/text()")
     original_price = ""
     if len(div_with_discount) > 0:
-        original_price = str(selector_obj.xpath(".//div[contains(@class,'search_price discounted')]/span/strike/text()").get()).strip()  
+        original_price = selector_obj.xpath(".//div[contains(@class,'search_price discounted')]/span/strike/text()").get()
     else:
-        original_price = str(selector_obj.xpath(".//div[@class='col search_price  responsive_secondrow']/text()").get()).strip()
+        original_price = selector_obj.xpath(".//div[@class='col search_price  responsive_secondrow']/text()").get()
     return original_price
 
 def clean_discounted_price(discounted_price):
