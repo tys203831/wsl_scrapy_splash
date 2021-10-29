@@ -117,7 +117,7 @@ class ListingsSpider(scrapy.Spider):
                         )
 
     def parse(self, response):
-        jsonresponse = json.loads(response.body) # unable to decode html
+        jsonresponse = (response.body) # unable to decode html
         html_text = html.unescape(jsonresponse.get('d').get('Result').get('html'))
         sel = Selector(text=html_text)
         products = sel.xpath("//*[@itemtype='http://schema.org/Product']")
